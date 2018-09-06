@@ -26,7 +26,7 @@ module.exports.run = async (bot, message, args) => {
 	
 	if(args[0] != "lifetime" && args[0] != "solo" && args[0] != "duo" && args[0] != "squad") return message.reply("Format !fn <solo,duo,squad,lifetime> <username>");	
 		
-		let data = apikey.user(username, platform).then(data => {
+		let data = fortnite.user(username, platform).then(data => {
 			let stats = data.stats;
 			
 			if(gamemode === `solo`) {
