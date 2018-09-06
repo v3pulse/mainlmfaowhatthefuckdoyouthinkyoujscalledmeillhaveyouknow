@@ -3,8 +3,9 @@ const Client = require("fortnite");
 const fortnite = new Client(process.env.APIKEY);
 
 module.exports.run = async (bot, message, args) => {
-const fortnite = require("fortnite");
-const apikey = process.env.APIKEY;
+const Client = require("fortnite");
+	const fortnite = new Client(process.env.APIKEY);
+
   if(message.channel.id != "482044199504707584") return;
   
   let username = args.slice(0).join(" ") || message.author.username;
