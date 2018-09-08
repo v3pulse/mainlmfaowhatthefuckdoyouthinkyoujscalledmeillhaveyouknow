@@ -84,7 +84,6 @@ if(args[0] === "invite"){
   let inviterole = message.guild.roles.find(r => r.name === args[2].toUpperCase());
 	if(!message.member.nickname.includes(args[2].toUpperCase())) return message.reply("Cant do so sir.");
 	if(!message.member.nickname.includes("*")) return message.reply("You are not the owner of this team.");
-	if(!message.member.roles.has(inviterole)) return message.reply("You cannot invite people!");
     ruser.addRole(inviterole);
     message.reply(`${ruser} has been invited to ${args[2]}`).then(msg => msg.delete(20000));
     message.reply(`${ruser} you have 20 seconds to do !t join (team name) without brackets`).then(msg => msg.delete(20000));
