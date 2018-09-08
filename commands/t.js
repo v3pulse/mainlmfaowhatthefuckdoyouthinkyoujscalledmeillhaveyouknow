@@ -45,13 +45,14 @@ module.exports.run = async (bot, message, args) => {
 	   	}catch(e){
 		  	console.log(e.stack);
 			
-	  	}	
+	  		
 	if(teamrole){
 	return message.reply(`**${args[1].toUpperCase()}** has already been created!`);
 	}
+		}
 	
 	
-	}
+	
 	if(args[0] === "disband"){
 	let yeters = new Discord.RichEmbed()
 	.setTitle("Invalid Usage")
