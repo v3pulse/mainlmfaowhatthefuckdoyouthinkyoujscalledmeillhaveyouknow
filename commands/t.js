@@ -22,7 +22,13 @@ module.exports.run = async (bot, message, args) => {
 	
 	}
 	if(args[0] === "disband"){
-	if(!args[1]) return message.reply("Please use !t disband (team name) without brackets.");
+	let yeters = new Discord.RichEmbed()
+	.setTitle("Invalid Usage")
+	.setDescription("Try !t disband (team name) without brackets.")
+	.setFooter("Command sent at")
+	.setTimestamp()
+	.setColor("#ff0000");
+	if(!args[1]) return message.reply(yeters);
 	if(!message.member.nickname.includes(`${args[1].toUpperCase()}]`)) return message.reply("Cant do that.");
 	if(message.member.nickname.includes("[" && args[1] && "*")){
 	if(args[1]){
@@ -50,9 +56,37 @@ module.exports.run = async (bot, message, args) => {
 	}
 
 	if(args[0] === "kick"){
-	if(!args[2]) return message.reply("Try !t kick (@user) (team) without brackets.");
+	let trykick = new Discord.RichEmbed()
+	.setTitle("Invalid Usage")
+	.setDescription("Try !t kick (@user) (team) without brackets.")
+	.setFooter("Command sent at")
+	.setTimestamp()
+	.setColor("#ff0000");
+	let usernot = new Discord.RichEmbed()
+	.setTitle("Invalid Usage")
+	.setDescription("This user is not in your team!")
+	.setFooter("Command sent at")
+	.setTimestamp()
+	.setColor("#ff0000");
+	let cannot = new Discord.RichEmbed()
+	.setTitle("Invalid Usage")
+	.setDescription("You cant kick people silly!")
+	.setFooter("Command sent at")
+	.setTimestamp()
+	.setColor("#ff0000");
+	let inteam = new Discord.RichEmbed()
+	.setTitle("Invalid Usage")
+	.setDescription("This user is not a member of your team")
+	.setFooter("Command sent at")
+	.setTimestamp()
+	.setColor("#ff0000");
+	
+	if(!message.member.nickname.includes("*")) return message.reply(cannot);
+	if(!args[2]) return message.reply(trykick);
+	if(!message.member.nickname === args[2].toUpperCase()) return message.reply(usernot);
+	
 	let ruser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]));
-	if(ruser) return message.reply("Try !t kick (@user) (team) without brackets.");
+	if(!ruser.nickname.includes(args[2].toUpperCase())) return message.reply(inteam);
 	if(args[0] === "kick" && ruser && args[2]){
 	if(ruser.nickname.includes("[") && ruser.nickname.includes(args[2].toUpperCase())){
 	ruser.setNickname(message.member.nickname.split(/ +/g).splice(2).join(" "));
