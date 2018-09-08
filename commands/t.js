@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
-	let createteam = message.guild.roles.find(r => r.name === args[1]);
+	let createteam = message.guild.roles.find(r => r.name === args[1].toUpperCase());
 	let error = new Discord.RichEmbed()
 .setTitle("Invalid Usage")
 .setDescription("Correct Usage: !t kick | !t invite | !t create | !t disband | !t join | !t leave | !t info")
@@ -17,19 +17,14 @@ if(args[0] === "create"){
   if(args[1].length <= 3) return message.reply("More than 3 letters please");
   if(args[1].length > 12) return message.reply("Less than 12 letters please");
   if(args[1].includes("nigg")) return message.reply("No racism please");
+	message.member.guild.createRole({ name: args[1].toUpperCase(), color: "#ff0000", permissions:[] });
   message.member.setNickname(`[*${args[1].toUpperCase()}] ${message.member.nickname}`);
   message.reply(`Team ${args[1].toUpperCase()} created!`);
   
-	message.member.guild.createRole({
 
-    name: args[1].toUpperCase(),
-    color: "#ff0000",
-    permissions:[]
-    
-	});
-	if(!message.member.roles.has(createteam)){
+
 	message.member.addRole(createteam);
-	}
+	
 
 
 
@@ -167,7 +162,6 @@ if(args[0] === "leave"){
 
 }
 }
-
   
 
 
