@@ -82,7 +82,9 @@ if(args[0] === "invite"){
   if(!ruser) return message.reply("Please select a person to invite Example: (@person)");
   if(!args[2]) return message.reply("Try !t invite (@person) (team name) without brackets.");
   let inviterole = message.guild.roles.find(r => r.name === args[2].toUpperCase());
-    if(message.member.nickname.includes(args[2].toUpperCase() && message.member.nickname.includes("*")) && inviterole){
+	if(!message.member.nickname.includes(args[2].toUpperCase())) return message.reply("Cant do so sir.");
+	if(!message.member.nickname.includes("*")) return message.reply("You are not the owner of this team.");
+	if(!message.member.roles.has(inviterole)) return message.reply("You cannot invite people!");
     ruser.addRole(inviterole);
     message.reply(`${ruser} has been invited to ${args[2]}`).then(msg => msg.delete(20000));
     message.reply(`${ruser} you have 20 seconds to do !t join (team name) without brackets`).then(msg => msg.delete(20000));
@@ -93,7 +95,7 @@ if(args[0] === "invite"){
     
   
     
-  }
+  
 }
 
 if(args[0] === "kick"){
