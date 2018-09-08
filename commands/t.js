@@ -44,6 +44,7 @@ if(args[0] === "create"){
 	   	}catch(e){
 		  	console.log(e.stack);
 	  	}
+	 }
 
 	
 	
