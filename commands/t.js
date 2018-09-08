@@ -53,6 +53,7 @@ if(args[0] === "create"){
 if(args[0] === "disband"){
   let userpic = message.member.displayAvatarURL;
   let team = args[1].toUpperCase();
+	let teamrole = message.guild.roles.find(r => r.name === args[1].toUpperCase());
   let yeters = new Discord.RichEmbed()
   .setTitle("Invalid Usage")
   .setDescription("Try !t disband (team name) without brackets!")
@@ -67,7 +68,7 @@ if(args[0] === "disband"){
 
 	message.member.setNickname(message.member.nickname.split(/ +/g).splice(1).join(" "));
       message.reply(`You have disbanded **${args[1].toUpperCase()}**`);
-      message.guild.roles.find(r => r.name === team.delete("lmaokid"));
+      message.guild.roles.find(teamrole.delete("pce"));
     }else{
       return message.reply(yeters);
       console.log("error");
