@@ -128,7 +128,7 @@ if(args[0] === "kick"){
 
     if(ruser.roles.has(kick)){
 
-      ruser.setNickname(message.member.nickname.split(/ +/g).splice(2).join(" ");
+      ruser.setNickname(message.member.nickname.split(/ +/g).splice(2).join(" "));
       ruser.removeRole(kick);
       message.reply(`${ruser} has been kicked from ${args[2].toUpperCase}`);
       
