@@ -94,7 +94,7 @@ if(args[0] === "invite"){
 
 if(args[0] === "kick"){
   //!t kick user team
-  let usericon = message.member.displayAvatarURL;
+  let uesricon = message.member.displayAvatarURL;
   let trykick = new Discord.RichEmbed()
 	.setTitle("Invalid Usage")
 	.setDescription("Try !t kick (@user) (team) without brackets.")
