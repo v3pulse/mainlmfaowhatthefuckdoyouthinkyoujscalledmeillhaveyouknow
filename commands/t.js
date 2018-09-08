@@ -23,7 +23,7 @@ if(args[0] === "create"){
   
 
 
-	message.author.addRole(createteam);
+	message.member.addRole(message.guild.roles.find("name", args[1]));
 	
 
 
