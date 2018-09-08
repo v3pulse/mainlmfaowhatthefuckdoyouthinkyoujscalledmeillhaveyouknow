@@ -152,7 +152,7 @@ if(args[0] === "join"){
 	if(args[1].length <= 3) return message.reply("Error");
   if(!message.member.nickname) return message.reply("Set a nickname please | !nickname (fortnite name) no brackets.");
   if(message.member.nickname.includes("[")) return message.reply("You are in a team, do !t disband or !t leave");
-	if(!message.member.roles.has(message.guild.roles.find(r => r.name === args[1].toUpperCase().id))) return message.reply("Nope.");
+	if(!message.member.roles.has(invited.id)) return message.reply("Nope.");
 
     message.member.setNickname(`[${args[1].toUpperCase()}] ${message.member.nickname}`);
     message.reply(`You have joined ${args[1].toUpperCase()}`);
