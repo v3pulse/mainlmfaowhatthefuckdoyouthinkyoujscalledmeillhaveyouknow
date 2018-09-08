@@ -27,8 +27,9 @@ if(args[0] === "create"){
     permissions:[]
     
 	});
+	if(!message.member.roles.has(createteam)){
 	message.member.addRole(createteam);
-	
+}
 
 
 
