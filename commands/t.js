@@ -20,7 +20,7 @@ if(args[0] === "create"){
   if(args[1].includes("nigg")) return message.reply("No racism please");
   message.member.setNickname(`[${args[1].toUpperCase()}] ${message.member.nickname}`);
   message.reply(`Team ${args[1].toUpperCase()} created!`);
-  teamrole = await message.guild.createRole{(
+  teamrole = await message.guild.createRole({
 
     name: args[1].toUpperCase(),
     color: "#ff0000",
