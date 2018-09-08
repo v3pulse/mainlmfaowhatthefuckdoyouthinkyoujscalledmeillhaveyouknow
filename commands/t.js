@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
-	let createteam = message.guild.roles.find(r => r.name === args[1]);
 	let error = new Discord.RichEmbed()
 .setTitle("Invalid Usage")
 .setDescription("Correct Usage: !t kick | !t invite | !t create | !t disband | !t join | !t leave | !t info")
@@ -9,10 +8,11 @@ module.exports.run = async (bot, message, args) => {
 .setColor("#ff0000");
 if(!args[0]) return message.reply(error);
 if(args[0] === "create"){
+
 	if(!message.member.nickname) return message.reply("Do !nickname (fortnite name) without brackets.");
 	if(message.member.nickname.includes("[") && message.member.nickname.includes("]")) return message.reply("You are in a team");
-  let teamrole = message.guild.roles.find(r => r.name === args[1].toUpperCase());
   if(!args[1]) return message.reply(error);
+  let teamrole = message.guild.roles.find(r => r.name === args[1].toUpperCase());
   if(teamrole) return message.reply("This team already exists");
   if(args[1].length <= 3) return message.reply("More than 3 letters please");
   if(args[1].length > 12) return message.reply("Less than 12 letters please");
@@ -20,18 +20,8 @@ if(args[0] === "create"){
 	message.member.guild.createRole({ name: args[1].toUpperCase(), color: "#ff0000", permissions:[] });
   message.member.setNickname(`[*${args[1].toUpperCase()}] ${message.member.nickname}`);
   message.reply(`Team ${args[1].toUpperCase()} created!`);
-  
-
-
-	message.member.addRole(message.guild.roles.find("name", args[1]));
+  message.member.addRole(teamrole);
 	
-
-
-
-  
-
-
-  
 }
 
 if(args[0] === "disband"){
