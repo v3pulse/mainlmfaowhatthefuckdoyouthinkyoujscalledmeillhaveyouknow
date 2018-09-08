@@ -19,8 +19,10 @@ module.exports.run = async (bot, message, args) => {
 		
 	const apikey = process.env.APIKEY;
 
+	if(message.member.nickname.includes("[") && message.member.nickname.includes("]")){
 		
-	
+		message.reply("If you do not have a rank please leave your team to get ranked.");
+	}
 	
 	if(args[0] === "help") return message.reply("Format !fn <solo, duo, squad, lifetime> <username>");
 	
