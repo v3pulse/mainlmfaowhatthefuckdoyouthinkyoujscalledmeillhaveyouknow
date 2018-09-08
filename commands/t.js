@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
-	let createteam = message.guild.roles.find(r => r.name === args[1].toUpperCase());
+	let createteam = message.guild.roles.find(r => r.name === args[1]);
 	let error = new Discord.RichEmbed()
 .setTitle("Invalid Usage")
 .setDescription("Correct Usage: !t kick | !t invite | !t create | !t disband | !t join | !t leave | !t info")
