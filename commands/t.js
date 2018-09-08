@@ -29,15 +29,6 @@ if(args[0] === "create"){
 	message.member.addRole(message.guild.roles.find(r => r.name === args[1].toUpperCase()));
 
 
-  message.guild.channels.forEach(async (channel, id) => {
-
-    await channel.overwritePermissions(teamrole, {
-	CHANGE_NICKNAME: false,
-      ADD_REACTIONS: false
-    });
-  });
-	
-
 
 
   
