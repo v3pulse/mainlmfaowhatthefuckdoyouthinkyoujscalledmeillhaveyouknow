@@ -20,13 +20,14 @@ if(args[0] === "create"){
   if(args[1].includes("nigg")) return message.reply("No racism please");
   message.member.setNickname(`[${args[1].toUpperCase()}] ${message.member.nickname}`);
   message.reply(`Team ${args[1].toUpperCase()} created!`);
-  teamrole = await message.guild.createRole({
+  
+	message.member.guild.createRole({
 
     name: args[1].toUpperCase(),
     color: "#ff0000",
     permissions:[]
     
-  )}
+	});
   message.member.addRole(message.guild.roles.find(r => r.name === args[1].toUpperCase()));
 
   message.guild.channels.forEach(async (channel, id) => {
