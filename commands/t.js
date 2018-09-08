@@ -38,7 +38,7 @@ module.exports.run = async (bot, message, args) => {
 
 
 		  	});
-		
+		}u
 		
 		
 
@@ -195,6 +195,7 @@ module.exports.run = async (bot, message, args) => {
 	return message.reply("Team does not exist.");
 	}
 	
+	}
 	}
   
 
