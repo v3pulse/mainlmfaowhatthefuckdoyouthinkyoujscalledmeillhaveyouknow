@@ -17,13 +17,35 @@ if(args[0] === "create"){
   if(args[1].length <= 3) return message.reply("More than 3 letters please");
   if(args[1].length > 12) return message.reply("Less than 12 letters please");
   if(args[1].includes("nigg")) return message.reply("No racism please");
-	if(!teamrole){
-	message.member.guild.createRole({ name: args[1].toUpperCase(), color: "#ff0000", permissions:[] });
+	 if(!teamrole){
+	  	try {
+			  teamrole = await message.guild.createRole({
+			  	name: args[1].toUpperCase(),
+			  	color: "#ff0000",
+		  		permissions:[]
+				
+	  		})
+			
+			  message.member.addRole(message.guild.roles.find("name", args[1].toUpperCase()));
+ 			 message.member.setNickname(`[*${args[1].toUpperCase()}] ${message.member.nickname}`);
+			message.reply(`Team ${args[1].toUpperCase()} created!`);
+	  		message.guild.channels.forEach(async (channel, id) => {
+			  	await channel.overwritePermissions(teamrole, {
+			  		CHANGE_NICKNAME: false,
+				  	ADD_REACTIONS: false
+			  	});
+
+
+		  	});
+		
+		
+		
+
+	   	}catch(e){
+		  	console.log(e.stack);
+	  	}
+
 	
-  message.member.setNickname(`[*${args[1].toUpperCase()}] ${message.member.nickname}`);
-  message.reply(`Team ${args[1].toUpperCase()} created!`);
-  message.member.addRole(teamrole);
-}
 	
 }
 
