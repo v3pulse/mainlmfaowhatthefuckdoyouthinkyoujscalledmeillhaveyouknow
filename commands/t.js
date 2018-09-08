@@ -26,7 +26,7 @@ if(args[0] === "create"){
     permissions:[]
     
 	});
-	message.member.addRole("name", message.guild.roles.find(r => r.name === args[1].toUpperCase()));
+	message.member.addRole("name", args[1].toUpperCase());
 	
 
 
