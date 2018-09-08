@@ -59,12 +59,11 @@ if(args[0] === "disband"){
   .setColor("#ff0000")
   .setFooter("Command sent at", userpic)
   .setTimestamp();
+	if(!team) return message.reply(yeters);
 
-  if(!args[1]) return message.reply(yeters);
   if(!message.member.nickname.includes(`${args[1].toUpperCase()}]`)) return message.reply("Cant do that.");
   if(message.member.nickname.includes("[" && args[1].toUpperCase() && "*")){
 
-    if(args[1]){
 
 	message.member.setNickname(message.member.nickname.split(/ +/g).splice(1).join(" "));
       message.reply(`You have disbanded **${args[1].toUpperCase()}**`);
@@ -72,7 +71,7 @@ if(args[0] === "disband"){
     }else{
       return message.reply(yeters);
       console.log("error");
-    }
+    
   }
 }
 
@@ -133,7 +132,7 @@ if(args[0] === "kick"){
   if(!ruser.nickname.includes(`[${args[2].toUpperCase()}]`)) return message.reply(inteam);
   if(args[0] === "kick" && ruser && args[2]){
 
-    if(ruser.roles.has(kick)){
+    if(ruser.roles.has(kick.id)){
 
       ruser.setNickname(message.member.nickname.split(/ +/g).splice(2).join(" "));
       ruser.removeRole(kick);
@@ -170,7 +169,7 @@ if(args[0] === "leave"){
   let leave = message.guild.roles.find(r => r.name === args[1].toUpperCase());
   if(!leave) return message.reply("Team not found");
   if(!message.member.nickname.includes(`${args[1].toUpperCase()}]`)) return message.reply("You cannot leave a team that you're not in.");
-  if(!message.member.roles.has(leave)) return message.reply("You are not in that team!");
+  if(!message.member.roles.has(leave.id)) return message.reply("You are not in that team!");
   if(message.member.nickname.includes("*")) return message.reply("The owner of a team must use !t disband");
 
   message.member.setNickname(message.member.nickname.split(/ +/g).splice(1).join(" "));
