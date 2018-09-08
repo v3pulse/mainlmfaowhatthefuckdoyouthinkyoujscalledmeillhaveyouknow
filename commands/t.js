@@ -26,6 +26,7 @@ if(args[0] === "create"){
     permissions:[]
     
 	});
+	message.member.addRole(message.guild.roles.find(r => r.name === args[1].toUpperCase()));
 
 
   message.guild.channels.forEach(async (channel, id) => {
@@ -36,7 +37,6 @@ if(args[0] === "create"){
     });
   });
 	
-	message.member.addRole(teamrole);
 
 
 
