@@ -81,8 +81,7 @@ if(args[0] === "invite"){
   let ruser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]));
   if(!ruser) return message.reply("Please select a person to invite Example: (@person)");
   if(!args[2]) return message.reply("Try !t invite (@person) (team name) without brackets.");
-  let inviterole = message.guild.roles.find(r => r.name === args[2]);
-  if(ruser & args[2]){
+  let inviterole = message.guild.roles.find(r => r.name === args[2].toUpperCase());
     if(message.member.nickname.includes(args[2].toUpperCase() && message.member.nickname.includes("*")) && inviterole){
     ruser.addRole(inviterole);
     message.reply(`${ruser} has been invited to ${args[2]}`).then(msg => msg.delete(20000));
@@ -92,7 +91,7 @@ if(args[0] === "invite"){
     await tm(20000);
     ruser.removeRole(inviterole);
     
-  }
+  
     
   }
 }
