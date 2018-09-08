@@ -120,7 +120,7 @@ if(args[0] === "kick"){
 
   if(!message.member.nickname.includes("*")) return message.reply(cannot);
   if(!args[2]) return message.reply(trykick);
-  if(!message.member.nickname.includes(`[*${args[2].toUpperCase()}]`) return message.reply(usernot);
+  if(!message.member.nickname.includes(`[*${args[2].toUpperCase()}]`)) return message.reply(usernot);
   let kick = message.guild.roles.find(r => r.name === args[2].toUpperCase());
   let ruser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]));
   if(!ruser.nickname.includes(`[${args[2].toUpperCase()}]`)) return message.reply(inteam);
