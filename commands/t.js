@@ -9,14 +9,14 @@ module.exports.run = async (bot, message, args) => {
 if(!args[0]) return message.reply(error);
 if(args[0] === "create"){
 	if(!message.member.nickname) return message.reply("Do !nickname (fortnite name) without brackets.");
-	if(message.member.nickname.includes("[") && message.member.nickname.includes("]")) return message.reply("You are already in a team.");
+	if(message.member.nickname.includes("[") && message.member.nickname.includes("]")) return message.reply("You are in a team");
   let teamrole = message.guild.roles.find(r => r.name === args[1].toUpperCase());
   if(!args[1]) return message.reply(error);
   if(teamrole) return message.reply("This team already exists");
   if(args[1].length <= 3) return message.reply("More than 3 letters please");
   if(args[1].length > 12) return message.reply("Less than 12 letters please");
   if(args[1].includes("nigg")) return message.reply("No racism please");
-  message.member.setNickname(`[${args[1].toUpperCase()}] ${message.member.nickname}`);
+  message.member.setNickname(`[*${args[1].toUpperCase()}] ${message.member.nickname}`);
   message.reply(`Team ${args[1].toUpperCase()} created!`);
   
 	message.member.guild.createRole({
@@ -26,15 +26,16 @@ if(args[0] === "create"){
     permissions:[]
     
 	});
-  message.member.addRole(message.guild.roles.find(r => r.name === args[1].toUpperCase()));
 
-//   message.guild.channels.forEach(async (channel, id) => {
+  message.guild.channels.forEach(async (channel, id) => {
 
-//     await channel.overwritePermissions(teamrole, {
-// 	CHANGE_NICKNAME: false,
-//       ADD_REACTIONS: false
-//     });
-//   });
+    await channel.overwritePermissions(teamrole, {
+	CHANGE_NICKNAME: false,
+      ADD_REACTIONS: false
+    });
+  });
+	  message.member.addRole(message.guild.roles.find(r => r.name === args[1].toUpperCase()));
+
 
   
 
