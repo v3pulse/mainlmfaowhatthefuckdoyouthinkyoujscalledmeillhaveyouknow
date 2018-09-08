@@ -23,7 +23,7 @@ if(args[0] === "create"){
   
 
 
-	message.member.addRole(createteam);
+	message.author.addRole(createteam);
 	
 
 
