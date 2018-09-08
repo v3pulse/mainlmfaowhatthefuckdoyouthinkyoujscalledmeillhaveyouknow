@@ -3,8 +3,6 @@ const Client = require("fortnite");
 const fortnite = new Client(process.env.APIKEY);
 
 module.exports.run = async (bot, message, args) => {
-const Client = require("fortnite");
-	const fortnite = new Client(process.env.APIKEY);
 
   if(message.channel.id != "482044199504707584") return;
   
