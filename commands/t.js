@@ -56,16 +56,17 @@ module.exports.run = async (bot, message, args) => {
 	}
 
 	if(args[0] === "kick"){
+	let uesricon = message.member.displayAvatarURL;
 	let trykick = new Discord.RichEmbed()
 	.setTitle("Invalid Usage")
 	.setDescription("Try !t kick (@user) (team) without brackets.")
-	.setFooter("Command sent at")
+	.setFooter("Command sent at", uesricon)
 	.setTimestamp()
 	.setColor("#ff0000");
 	let usernot = new Discord.RichEmbed()
-	.setTitle("Invalid Usage")
+	.setTitle("Error")
 	.setDescription("This user is not in your team!")
-	.setFooter("Command sent at")
+	.setFooter("Command sent at", uesricon)
 	.setTimestamp()
 	.setColor("#ff0000");
 	let cannot = new Discord.RichEmbed()
@@ -77,7 +78,7 @@ module.exports.run = async (bot, message, args) => {
 	let inteam = new Discord.RichEmbed()
 	.setTitle("Invalid Usage")
 	.setDescription("This user is not a member of your team")
-	.setFooter("Command sent at")
+	.setFooter("Command sent at", uesricon)
 	.setTimestamp()
 	.setColor("#ff0000");
 	
