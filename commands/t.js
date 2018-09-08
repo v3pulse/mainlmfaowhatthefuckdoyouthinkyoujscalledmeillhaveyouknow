@@ -26,8 +26,8 @@ if(args[0] === "create"){
     permissions:[]
     
 	});
-	message.member.addRole(message.guild.roles.find(r => r.name === args[1].toUpperCase()));
-
+	message.member.addRole("name", message.guild.roles.find(r => r.name === args[1].toUpperCase()));
+	
 
 
 
@@ -52,7 +52,7 @@ if(args[0] === "disband"){
 
     if(args[1]){
 
-      message.member.setNickname(message.member.nicknamme.split(/ +/g).splice(1).join(" "));
+	message.member.setNickname(message.member.nickname.split(/ +/g).splice(1).join(" "));
       message.reply(`You have disbanded **${args[1].toUpperCase()}**`);
       message.guild.roles.find(r => r.name === args[1].toUpperCase().delete("lmaokid"));
     }else{
