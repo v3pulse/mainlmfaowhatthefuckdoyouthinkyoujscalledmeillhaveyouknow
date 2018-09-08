@@ -78,7 +78,7 @@ if(args[0] === "disband"){
 
 if(args[0] === "invite"){
  //!t invite person name
-  let ruser = message.guild.member(message.mentions.user.first()) || message.guild.members.get(args[1]));
+  let ruser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]));
   if(!ruser) return message.reply("Please select a person to invite Example: (@person)");
   if(!args[2]) return message.reply("Try !t invite (@person) (team name) without brackets.");
   let inviterole = message.guild.roles.find(r => r.name === args[2]);
