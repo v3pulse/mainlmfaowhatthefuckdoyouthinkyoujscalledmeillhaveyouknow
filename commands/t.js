@@ -2,96 +2,97 @@ const Discord = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
 	let error = new Discord.RichEmbed()
-	.setTitle("Invalid Usage!")
-	.setDescription("Correct Usage: *!t kick | !t invite | !t create | !t disband | !t join | !t leave*")
-	.addField("**NOTE:**", "Remember, for this to work properly, please set a nickname, with !nickname (your fortnite name) without brackets.")
-	.setColor(6812512);
-	if(!args[0]) return message.reply(error);   
-	if(args[0] === "create"){
-	if(message.member.nickname.includes("[" && "]")){
-	message.reply("You are already in a team!");
-		return;
-	}
-	let teamrole = message.guild.roles.find(r => r.name === args[1].toUpperCase());
-	
-	if(!args[1]) return;
-	if(args[1].length <= 3) return message.reply("More than 3 letters please.");
-	if(args[1].length > 12) return message.reply("Team name must be less than 12 letters");
-	if(args[1].includes("nigg")) return message.reply("Stop that!");
-	message.member.setNickname(`[*${args[1].toUpperCase()}] ${message.member.nickname}`);
-	message.reply(`Team ${args[1]} Created!`);
-	  if(!teamrole){
-	  	try {
-			  teamrole = await message.guild.createRole({
-			  	name: args[1].toUpperCase(),
-			  	color: "#ff0000",
-		  		permissions:[]
-				
-	  		})
-			
-			  message.member.addRole(message.guild.roles.find("name", args[1]));
+.setTitle("Invalid Usage")
+.setDescription("Correct Usage: !t kick | !t invite | !t create | !t disband | !t join | !t leave | !t info")
+.addField("**NOTE:**", "For this command to work properly please set a nickname, with !nickname (fortnite name) withot brackets.")
+.setColor("#ff0000");
+if(!args[0]) return message.reply(error);
+if(args[0] === "create"){
+  if(message.member.nickname.includes("[" && "]")){
+    message.reply("You are already in a team");
+    return;
+  }
+  let teamrole = message.guild.roles.find(r => r.name === args[1].toUpperCase());
+  if(!args[1]) return message.reply(error);
+  if(teamrole) return message.reply("This team already exists");
+  if(args[1].length <= 3) return message.reply("More than 3 letters please");
+  if(args[1].length > 12) return message.reply("Less than 12 letters please");
+  if(args[1].includes("nigg")) return message.reply("No racism please");
+  message.member.setNickname(`[${args[1].toUpperCase()}] ${message.member.nickname}`);
+  message.reply(`Team ${args[1].toUpperCase()} created!`);
+  teamrole = await message.guild.createRole{(
 
-	  		message.guild.channels.forEach(async (channel, id) => {
-			  	await channel.overwritePermissions(teamrole, {
-				  	ADD_REACTIONS: false
-			  	});
+    name: args[1].toUpperCase(),
+    color: "#ff0000",
+    permissions:[]
+    
+  )}
+  message.member.addRole(message.guild.roles.find(r => r.name === args[1].toUpperCase()));
+
+  message.guild.channels.forEach(async (channel, id) => {
+
+    await channel.overwritePermissions(teamrole, {
+
+      ADD_REACTIONS: false
+    });
+  });
+
+  
 
 
-		  	});
-		}
-		
-		
+  
+}
 
-	   	}catch(e){
-		  	console.log(e.stack);
-			
-	  		
-	if(teamrole){
-	return message.reply(`**${args[1].toUpperCase()}** has already been created!`);
-	}
-		}
-	
-	
-	
-	if(args[0] === "disband"){
-	let yeters = new Discord.RichEmbed()
-	.setTitle("Invalid Usage")
-	.setDescription("Try !t disband (team name) without brackets.")
-	.setFooter("Command sent at")
-	.setTimestamp()
-	.setColor("#ff0000");
-	if(!args[1]) return message.reply(yeters);
-	if(!message.member.nickname.includes(`${args[1].toUpperCase()}]`)) return message.reply("Cant do that.");
-	if(message.member.nickname.includes("[" && args[1] && "*")){
-	if(args[1]){
-	message.member.setNickname(message.member.nickname.split(/ +/g).splice(1).join(" "));
-	message.reply(`You have disbanded **${args[1].toUpperCase()}**`);
-	message.guild.roles.find(role => role.name === args[1].toUpperCase()).delete("lmaokid");
+if(args[0] === "disband"){
+  let userpic = message.member.displayAvatarURL;
+  let yeters = new Discord.RichEmbed()
+  .setTitle("Invalid Usage")
+  .setDescription("Try !t disband (team name) without brackets!")
+  .setColor("#ff0000")
+  .setFooter("Command sent at", userpic)
+  .setTimestamp();
 
-	
-	}else{
-	return message.reply("!t disband (team name) without brackets!");
-	}
-	}
-	}
-	if(args[0] === "invite"){
-	let ruser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]));
-	if(!ruser) return message.reply("Please select a person to invite");
-		
-	if(ruser){
-	ruser.addRole(message.guild.roles.find("name", "Invited"));
-	message.reply(`${ruser} has been invited.`).then(msg => msg.delete(20000));
-	message.reply(`${ruser}, you have 20 seconds to do !t join (team name) without brackets`).then(msg => msg.delete(20000));
-	const tm = ms => new Promise(res => setTimeout(res, ms))
-	await tm(20000);
-	ruser.removeRole(message.guild.roles.find("name", "Invited"));
-	}
-	
-	}
+  if(!args[1]) return message.reply(yeters);
+  if(!message.member.nickname.includes(`${args[1].toUpperCase()}]`)) return message.reply("Cant do that.");
+  if(message.member.nickname.includes("[" && args[1].toUpperCase() && "*")){
 
-	if(args[0] === "kick"){
-	let uesricon = message.member.displayAvatarURL;
-	let trykick = new Discord.RichEmbed()
+    if(args[1]){
+
+      message.member.setNickname(message.member.nicknamme.split(/ +/g).splice(1).join(" "));
+      message.reply(`You have disbanded **${args[1].toUpperCase()}**`);
+      message.guild.roles.find(r => r.name === args[1].toUpperCase().delete("lmaokid"));
+    }else{
+      return message.reply(yeters);
+      console.log("error");
+    }
+  }
+}
+
+if(args[0] === "invite"){
+ //!t invite person name
+  let ruser = message.guild.member(message.mentions.user.first() || message.guild.members.get(args[1]));
+  if(!ruser) return message.reply("Please select a person to invite Example: (@person)");
+  if(!args[2]) return message.reply("Try !t invite (@person) (team name) without brackets.");
+  let inviterole = message.guild.roles.find(r => r.name === args[2]);
+  if(ruser & args[2]){
+    if(message.member.nickname.includes(args[2].toUpperCase() && message.member.nickname.includes("*")) && inviterole){
+    ruser.addRole(inviterole);
+    message.reply(`${ruser} has been invited to ${args[2]}`).then(msg => msg.delete(20000));
+    message.reply(`${ruser} you have 20 seconds to do !t join (team name) without brackets`).then(msg => msg.delete(20000));
+
+    const tm = ms => new Promise(res => setTimeout(res, ms))
+    await tm(20000);
+    ruser.removeRole(inviterole);
+    
+  }
+    
+  }
+}
+
+if(args[0] === "kick"){
+  //!t kick user team
+  let usericon = message.member.displayAvatarURL;
+  let trykick = new Discord.RichEmbed()
 	.setTitle("Invalid Usage")
 	.setDescription("Try !t kick (@user) (team) without brackets.")
 	.setFooter("Command sent at", uesricon)
@@ -115,89 +116,59 @@ module.exports.run = async (bot, message, args) => {
 	.setFooter("Command sent at", uesricon)
 	.setTimestamp()
 	.setColor("#ff0000");
-	
-	if(!message.member.nickname.includes("*")) return message.reply(cannot);
-	if(!args[2]) return message.reply(trykick);
-	if(!message.member.nickname === args[2].toUpperCase()) return message.reply(usernot);
-	let kick = message.guild.roles.find(r => r.name === args[2].toUpperCase());
-	let ruser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]));
-	if(!ruser.nickname.includes(args[2].toUpperCase())) return message.reply(inteam);
-	if(args[0] === "kick" && ruser && args[2]){
-	if(ruser.nickname.includes("[") && ruser.nickname.includes(args[2].toUpperCase()) && ruser.roles.has(kick)){
-	ruser.setNickname(message.member.nickname.split(/ +/g).splice(2).join(" "));
-	ruser.removeRole(kick);
-	message.reply(`${ruser} has been kicked from ${args[2]}`);
-	}
-	}
-	}
-	
-// 	if(args[0] === "info"){
-// 		const coderoles = message.guild.roles
-// 		.filter(r => r.name === "")
-// 		.sort((roleA, roleB) => roleA.name.localeCompare(roleB.name))
-// 		.array();
-// 		let usercon = message.member.displayAvatarURL;
-// 		let cantman = new Discord.RichEmbed()
-// 		.setTitle("Invalid Usage")
-// 		.setDescription("Try !t info (team name) without brackets")
-// 		.setFooter("Command sent at", usercon)
-// 		.setTimestamp()
-// 		.setColor("#ff0000");
-// 		let notyours = new Discord.RichEmbed()
-// 		.setTitle("Error")
-// 		.setDescription(`${args[1]} isnt your team!, try doing !t info (your team name) without brackets.`)
-// 		.setFooter("Command sent at", usercon)
-// 		.setTimestamp()
-// 		.setColor("#ff0000");
-// 		if(!args[1]) return message.reply(cantman);
-// 		if(args[2]) return message.reply(cantman);
-// 		if(!message.member.nickname.includes(`${args[1].toUpperCase}]`)) return message.reply(notyours);
-// 		let teamembed = new Discord.RichEmbed()
-// 		.setTitle(`Members of ${args[1]}`)
-// 		.setColor(6812512)
-// 		.setDescription()
-// 		.setFooter("Command sent at", usercon)
-// 		.setTimestamp();
-		
-		
-		
-	
-// 	}
-	if(args[0] === "join"){
-	let invited = message.guild.roles.find(r => r.name === "Invited");
-	if(!message.member.nickname) return message.reply("Please set a nickname with !nickname (fortnite name) without brackets.");
-	if(!args[1]) return message.reply("!t join (team name) without brackets.");
-	if(message.member.nickname.includes("[")) return message.reply("You are in a team, do !t disband or !t leave");
-	if(!message.member.roles.find(r => r.name === "Invited")) return message.reply("Sorry, i cant do that.");
-	let join = message.guild.roles.find(r => r.name === args[1].toUpperCase());
-	if(args[1].length > 3 && join){
-	message.member.setNickname(`[${args[1].toUpperCase()}] ${message.member.nickname}`);
-	message.reply(`You have joined ${args[1].toUpperCase()}`);
-	message.member.removeRole(message.guild.roles.find(r => r.name === "Invited"));
-	message.member.addRole(message.guild.roles.find(r => r.name === args[1].toUpperCase()));
-	
-	}else{
-	message.reply("Error.");
-	}
-	}
-	if(args[0] === "leave"){
-	
-	if(!args[1]) return message.reply("Usage !t leave (team name) without brackets.");
-	let leave = message.guild.roles.find(r => r.name === args[1].toUpperCase());
-	
-	if(!message.member.nickname.includes(`${args[1].toUpperCase()}]`)) return message.reply("You cannot leave a team that you're not in.");
-	if(message.member.nickname.includes("*")) return message.reply("The owner of a team must use !t disband");
-		
-	if(leave){
-	message.member.setNickname(message.member.nickname.split(/ +/g).splice(1).join(" "));
-	message.reply(`You have left **${args[1]}**.`);
-	message.member.removeRole(message.guild.roles.find(r => r.name === args[1].toUpperCase()));
-	}else{
-	return message.reply("Team does not exist.");
-	}
-	
-	
-	}
+
+  if(!message.member.nickname.includes("*")) return message.reply(cannot);
+  if(!args[2]) return message.reply(trykick);
+  if(!message.member.nickname.includes(`[*${args[2].toUpperCase()}]`) return message.reply(usernot);
+  let kick = message.guild.roles.find(r => r.name === args[2].toUpperCase());
+  let ruser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]));
+  if(!ruser.nickname.includes(`[${args[2].toUpperCase()}]`)) return message.reply(inteam);
+  if(args[0] === "kick" && ruser && args[2]){
+
+    if(ruser.roles.has(kick)){
+
+      ruser.setNickname(message.member.nickname.split(/ +/g).splice(2).join(" ");
+      ruser.removeRole(kick);
+      message.reply(`${ruser} has been kicked from ${args[2].toUpperCase}`);
+      
+    }
+  }
+  
+}
+
+if(args[0] === "join"){
+  if(!args[1]) return message.reply("Try !t join (team name) without brackets");
+  //!t join team
+  let invited = message.guild.roles.find(r => r.name === args[1].toUpperCase());
+  if(!invited) return message.reply("Team not found");
+  if(!message.member.nickname) return message.reply("Set a nickname please | !nickname (fortnite name) no brackets.");
+  if(message.member.nickname.includes("[")) return message.reply("You are in a team, do !t disband or !t leave");
+  if(!message.member.roles.has(args[1].toUpperCase())) return message.reply("You were not invited to this team");
+  if(args[1].length > 3){
+
+    message.member.setNickname(`[${args[1].toUpperCase()}] ${message.member.nickname}`);
+    message.reply(`You have joined ${args[1].toUpperCase()}`);
+    message.member.addRole(invited);
+  }
+  
+  
+}
+
+if(args[0] === "leave"){
+  //!t leave team
+  if(!args[1]) return message.reply("Usage !t leave (team name) without brackets");
+  let leave = message.guild.roles.find(r => r.name === args[1].toUpperCase());
+  if(!leave) return message.reply("Team not found");
+  if(!message.member.nickname.includes(`${args[1].toUpperCase()}]`)) return message.reply("You cannot leave a team that you're not in.");
+  if(!message.member.roles.has(leave)) return message.reply("You are not in that team!");
+  if(message.member.nickname.includes("*")) return message.reply("The owner of a team must use !t disband");
+
+  message.member.setNickname(message.member.nickname.split(/ +/g).splice(1).join(" "));
+  message.reply(`You have left ${args[1].toUpperCase()}`);
+  message.member.removeRole(leave);
+
+
+}
   
 
 
