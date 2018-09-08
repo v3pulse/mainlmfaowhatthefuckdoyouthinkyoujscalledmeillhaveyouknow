@@ -8,10 +8,8 @@ module.exports.run = async (bot, message, args) => {
 .setColor("#ff0000");
 if(!args[0]) return message.reply(error);
 if(args[0] === "create"){
-  if(message.member.nickname.includes("[" && "]")){
-    message.reply("You are already in a team");
-    return;
-  }
+
+	if(message.member.nickname.includes("[") && message.member.nickname.includes("]")) return message.reply("You are already in a team.");
   let teamrole = message.guild.roles.find(r => r.name === args[1].toUpperCase());
   if(!args[1]) return message.reply(error);
   if(teamrole) return message.reply("This team already exists");
