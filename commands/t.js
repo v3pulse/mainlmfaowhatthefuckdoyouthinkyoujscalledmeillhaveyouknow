@@ -95,6 +95,39 @@ module.exports.run = async (bot, message, args) => {
 	}
 	}
 	}
+	
+// 	if(args[0] === "info"){
+// 		const coderoles = message.guild.roles
+// 		.filter(r => r.name === "")
+// 		.sort((roleA, roleB) => roleA.name.localeCompare(roleB.name))
+// 		.array();
+// 		let usercon = message.member.displayAvatarURL;
+// 		let cantman = new Discord.RichEmbed()
+// 		.setTitle("Invalid Usage")
+// 		.setDescription("Try !t info (team name) without brackets")
+// 		.setFooter("Command sent at", usercon)
+// 		.setTimestamp()
+// 		.setColor("#ff0000");
+// 		let notyours = new Discord.RichEmbed()
+// 		.setTitle("Error")
+// 		.setDescription(`${args[1]} isnt your team!, try doing !t info (your team name) without brackets.`)
+// 		.setFooter("Command sent at", usercon)
+// 		.setTimestamp()
+// 		.setColor("#ff0000");
+// 		if(!args[1]) return message.reply(cantman);
+// 		if(args[2]) return message.reply(cantman);
+// 		if(!message.member.nickname.includes(`${args[1].toUpperCase}]`)) return message.reply(notyours);
+// 		let teamembed = new Discord.RichEmbed()
+// 		.setTitle(`Members of ${args[1]}`)
+// 		.setColor(6812512)
+// 		.setDescription()
+// 		.setFooter("Command sent at", usercon)
+// 		.setTimestamp();
+		
+		
+		
+	
+// 	}
 	if(args[0] === "join"){
 	let invited = message.guild.roles.find(r => r.name === "Invited");
 	if(!message.member.nickname) return message.reply("Please set a nickname with !nickname (fortnite name) without brackets.");
