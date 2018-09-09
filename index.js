@@ -57,6 +57,7 @@ bot.on("message", async message => {
 	xp[message.author.id].xp = curxp + xpAdd;
 	
 	if(nxtLvl <= xp[message.author.id].xp){
+	if(message.channel.id === "478949150340153358") return;
 	xp[message.author.id].level = curlvl + 1;
 	let lvlup = new Discord.RichEmbed()
 	.setTitle("Level Up")
