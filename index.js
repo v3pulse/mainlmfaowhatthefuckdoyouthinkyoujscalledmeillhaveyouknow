@@ -44,7 +44,7 @@ bot.on("message", async message => {
   let commandfile = bot.commands.get(cmd.slice(prefix.length));
   if(commandfile) commandfile.run(bot,message,args);
   if(message.channel.id === "493506505514156042"){
-const reactions = [":nae:", ":naw:", ":eu:"];
+const reactions = ["🥇", "🥈", "🥉"];
 
 	function generateMessages(){
 	const initialMessage = `**React below based on your region.**`;
