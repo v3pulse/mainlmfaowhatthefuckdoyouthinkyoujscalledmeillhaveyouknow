@@ -52,7 +52,7 @@ const reactions = ["🥇", "🥈", "🥉"];
 
 	var messages = [];
 	messages.push(initialMessage);
-	for(let role of roles) messages.push(`React below if your region is ${role} !`);
+	for(let role of roles) messages.push(`React below if your region is **${role}**!`);
 	return messages;
 }
     if(message.member.roles.find(r => r.name === "Management") && message.content.toLowerCase() == setupCMD){
