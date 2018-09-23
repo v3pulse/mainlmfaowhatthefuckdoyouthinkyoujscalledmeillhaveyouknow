@@ -154,6 +154,7 @@ bot.on('guildMemberAdd', member => {
 });
 
 bot.on('raw', event => {
+	
 		const initialMessage1 = `**React below based on your region.**`;
 
 	if(event.t === 'MESSAGE_REACTION_ADD' || event.t == "MESSAGE_REACTION_REMOVE"){
@@ -167,7 +168,10 @@ bot.on('raw', event => {
 			if(user.id != bot.user.id){
 			var roleObj = msg.guild.roles.find('name', role);
 			var memberObj = msg.guild.members.get(user.id);
-			
+			if(user.roles.has(msg.guild.roles.find(r => r.name === "NA-E"))) return;
+			if(user.roles.has(msg.guild.roles.find(r => r.name === "NA-W"))) return;
+			if(user.roles.has(msg.guild.roles.find(r => r.name === "EU"))) return;
+				
 			if(event.t === "MESSAGE_REACTION_ADD"){
 			memberObj.addRole(roleObj)
 			}else{
