@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports.run = async (bot, message, args) => {
-  if(message.channel.id != "481865517393510402") return;
+  if(message.channel.id != "493532426530848778") return;
 message.member.addRole(message.guild.roles.find("name", "Ranking"));
 	message.member.addRole(message.guild.roles.find("name", "EU"));
 	message.member.removeRole(message.guild.roles.find("name", "Starter"));
