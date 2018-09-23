@@ -6,6 +6,7 @@ const fs = require("fs");
 const botconfig = require("./botconfig.json");
 const token = process.env.BOT_TOKEN;
 
+
 bot.commands = new Discord.Collection();
  
 fs.readdir("./commands/", (err, files) => {
@@ -30,10 +31,11 @@ bot.on("ready", async () => {
   bot.user.setActivity("to your commands!", {type: "LISTENING"});
 });
 
+
 bot.on("message", async message => {
   if(message.author.bot) return;
   if(message.channel.type === "dm") return;
- 
+  const setupCMD = "!createrolemessage";
   let prefix = botconfig.prefix;
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
@@ -41,6 +43,30 @@ bot.on("message", async message => {
   let banMSG = message.content.toUpperCase();
   let commandfile = bot.commands.get(cmd.slice(prefix.length));
   if(commandfile) commandfile.run(bot,message,args);
+  if(message.channel.id === "493506505514156042"){
+const reactions = ["<:nae:481870830507261962>", "<:naw:481870830448541707>", "<:eu:481870830201077762>"];
+
+	function generateMessages(){
+	const initialMessage = `**React below based on your region.**`;
+	const roles = ["NA-E", "NA-W", "EU"];
+
+	var messages = [];
+	messages.push(initialMessage);
+	for(let role of roles) messages.push(`React below if your region is ${role} !`);
+	return messages;
+}
+    if(message.member.roles.find(r => r.name === "Management") && message.content.toLowerCase() == setupCMD){
+  var toSend = generateMessages();
+	  let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (message, idx) => [message, reactions[idx]])];
+	    for(let mapObj of mappedArray){
+	    message.channel.send(mapObj[0].then( sent => {
+	    if(mapObj[1]){
+	    sent.react(mapObj[1]);
+	    }
+	    }))
+	    }
+  }
+  }
    let xpAdd = Math.floor(Math.random() * 7) + 8;
 	
 	const xp = require("./xp.json");
@@ -127,25 +153,32 @@ bot.on('guildMemberAdd', member => {
   
 });
 
-bot.on('messageReactionAdd', (reaction, user) => {
-	const naeRole = reaction.message.guild.roles.find(r => r.name === "NA-E");
-	const nawRole = reaction.message.guild.roles.find(r => r.name === "NA-W");
-	const euRole = reaction.message.guild.roles.find(r => r.name === "EU");
-	const nae = "<:nae:481870830507261962>";
-	const naw = "<:naw:481870830448541707>";
-	const eu = "<:eu:481870830201077762>";
-	if(!reaction.message.id === "481891488385466369") return;
-	if(user.roles.has(naeRole) || user.roles.has(nawRole) || user.roles.has(euRole)) return;
-	if(reaction.name === nae){
-	user.addRole(reaction.message.guild.roles.find(r => r.name === "NA-E"))
-	}
-	if(reaction.name === naw){
-	user.addRole(reaction.message.guild.roles.find(r => r.name === "NA-W"))
-	}
-	if(reaction.name === eu){
-	user.addRole(reaction.message.guild.roles.find(r => r.name === "EU"))
-	}
+bot.on('raw', event => {
+		const initialMessage1 = `**React below based on your region.**`;
+
+	if(event.t === 'MESSAGE_REACTION_ADD' || event.t == "MESSAGE_REACTION_REMOVE"){
+	let channel = bot.channels.get(event.d.channel_id);
+	let message = channel.fetchMessage(event.d.message_id).then(msg => {
+	let user = msg.guild.members.get(event.d.user_id);
+		if(msg.author.id == bot.user.id && msg.content != initialMessage1){
+			var re = `\\*\\*"(.+)?(?="\\*\\*)`;
+			var role = msg.content.match(re)[1];
+			
+			if(user.id != bot.user.id){
+			var roleObj = msg.guild.roles.find('name', role);
+			var memberObj = msg.guild.members.get(user.id);
+			
+			if(event.t === "MESSAGE_REACTION_ADD"){
+			memberObj.addRole(roleObj)
+			}else{
+			memberObj.removeRole(roleObj);
+			}
+			}
+		}
+	})
 	
+	
+}
 	
 });
 
