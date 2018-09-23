@@ -131,9 +131,9 @@ bot.on('messageReactionAdd', (reaction, user) => {
 	const naeRole = reaction.message.guild.roles.find(r => r.name === "NA-E");
 	const nawRole = reaction.message.guild.roles.find(r => r.name === "NA-W");
 	const euRole = reaction.message.guild.roles.find(r => r.name === "EU");
-	const nae = "nae";
-	const naw = "naw";
-	const eu = "eu";
+	const nae = "<:nae:481870830507261962>";
+	const naw = "<:naw:481870830448541707>";
+	const eu = "<:eu:481870830201077762>";
 	if(!reaction.message.id === "481891488385466369") return;
 	if(user.roles.has(naeRole) || user.roles.has(nawRole) || user.roles.has(euRole)) return;
 	if(reaction.name === nae){
