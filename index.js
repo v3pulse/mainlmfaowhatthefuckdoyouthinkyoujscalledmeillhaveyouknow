@@ -115,7 +115,7 @@ bot.on('guildMemberAdd', member => {
 		let platChannel = member.guild.channels.find('name', 'choose-platform');
 		var role = member.guild.roles.find('name', 'Starter');
 
-	platChannel.send("Welcome", + member.toString().then(msg => msg.delete(1000)));
+	platChannel.send("Welcome", + member.toString()).then(msg => msg.delete(500));
 	member.addRole(role);
 	
 	
