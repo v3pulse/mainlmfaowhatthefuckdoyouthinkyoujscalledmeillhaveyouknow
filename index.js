@@ -165,7 +165,7 @@ bot.on('raw', event => {
 		
 		if(msg.author.id == bot.user.id && msg.content != initialMessage1){
 			
-			var re = `\\*\\*"(.+)?(?="\\*\\*)`;
+			let re = new RegExp(`\\*\\*(.+)?(?="\\*\\*)`);
             		var role = msg.content.match(re)[1];
 			
 			if(user.id != bot.user.id){
