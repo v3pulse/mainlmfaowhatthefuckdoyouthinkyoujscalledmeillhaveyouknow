@@ -117,11 +117,10 @@ bot.on('guildMemberAdd', member => {
 		let platChannel = member.guild.channels.find('name', 'starting');
 		var role = member.guild.roles.find('name', 'Starter');
 
-	platChannel.send("Welcome", + member.toString()).then(msg => msg.delete(500));
 	member.addRole(role);
 	
 	
-	member.guild.channels.find('name', 'starting').sendMessage(member.toString() + " Set platform!");
+	member.guild.channels.find('name', 'starting').sendMessage(member.toString() + " Set region!").then(msg => msg.delete(500));
 	platChannel.bulkDelete(1);
   
  
