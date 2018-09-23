@@ -63,7 +63,7 @@ const reactions = ["<:nae:481870830507261962>", "<:naw:481870830448541707>", "<:
 	    if(mapObj[1]){
 	    sent.react(mapObj[1]);
 	    }
-	    }))
+	    });
 	    }
   }
   }
