@@ -121,7 +121,7 @@ bot.on('guildMemberAdd', member => {
 	member.addRole(role);
 	
 	
-	member.guild.channels.find('name', 'choose-platform').sendMessage(member.toString() + " Set platform!");
+	member.guild.channels.find('name', 'starting').sendMessage(member.toString() + " Set platform!");
 	platChannel.bulkDelete(1);
   
  
