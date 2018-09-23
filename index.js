@@ -59,7 +59,7 @@ const reactions = ["<:nae:481870830507261962>", "<:naw:481870830448541707>", "<:
   var toSend = generateMessages();
 	  let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (message, idx) => [message, reactions[idx]])];
 	    for(let mapObj of mappedArray){
-	    message.channel.send(mapObj[0].then( sent => {
+	    message.channel.send(mapObj[0]).then( sent => {
 	    if(mapObj[1]){
 	    sent.react(mapObj[1]);
 	    }
