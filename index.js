@@ -115,8 +115,9 @@ bot.on('guildMemberAdd', member => {
 		let platChannel = member.guild.channels.find('name', 'choose-platform');
 		var role = member.guild.roles.find('name', 'Starter');
 
-	
+	platChannel.send("Welcome", + member.toString());
 	member.addRole(role);
+	
 	
 	member.guild.channels.find('name', 'choose-platform').sendMessage(member.toString() + " Set platform!");
 	platChannel.bulkDelete(1);
@@ -124,6 +125,28 @@ bot.on('guildMemberAdd', member => {
  
   
   
+});
+
+bot.on('messageReactionAdd', (reaction, user) => {
+	const naeRole = reaction.message.guild.roles.find(r => r.name === "NA-E");
+	const nawRole = reaction.message.guild.roles.find(r => r.name === "NA-W");
+	const euRole = reaction.message.guild.roles.find(r => r.name === "EU");
+	const nae = "nae";
+	const naw = "naw";
+	const eu = "eu";
+	if(!reaction.message.id === "481891488385466369") return;
+	if(user.roles.has(naeRole) || user.roles.has(nawRole) || user.roles.has(euRole)) return;
+	if(reaction.name === nae){
+	user.addRole(reaction.message.guild.roles.find(r => r.name === "NA-E"))
+	}
+	if(reaction.name === naw){
+	user.addRole(reaction.message.guild.roles.find(r => r.name === "NA-W"))
+	}
+	if(reaction.name === eu){
+	user.addRole(reaction.message.guild.roles.find(r => r.name === "EU"))
+	}
+	
+	
 });
 
 
